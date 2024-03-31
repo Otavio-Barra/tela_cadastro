@@ -6,25 +6,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pagina de cadatro</title>
   <link rel="stylesheet" href="./src/css/output.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&display=swap" rel="stylesheet">
+
 </head>
 
-<body>
-  <main>
-    <section>
-      <div>
+<body class="h-screen w-screen  flex items-center justify-center font-popins">
+  <main class="h-2/3 w-4/5">
+    <section class="bg-black text-white  p-10 rounded-xl h-full flex flex-col justify-around">
+      <div class="flex items-center flex-col gap-2">
+
         <img src="./src/imgs/INFOBANKlogo.png" alt="Logo do InfoBank">
-        <p>TECNOLOGIA DE PONTA</p>
+        <p class="font-normal text-xs">TECNOLOGIA DE PONTA</p>
       </div>
-      <div>
-        <h2>Bem-vindo de volta!</h2>
-        <p>Acesse sua conta agora mesmo.</p>
+      <div class="flex items-center flex-col gap-3">
+        <h2 class="text-2xl font-black text-start">Bem-vindo <span class="block ">de volta!</span> </h2>
+        <p class="text-sm">Acesse sua conta agora mesmo.</p>
       </div>
-      <div>
-        <button>entrar</button>
-        <a href="#">Esqueci minha senha.</a>
+      <div class="flex items-center flex-col gap-6">
+        <button
+          class="border-2 py-2 w-3/4 rounded-lg font-black text-xl duration-300 hover:bg-white hover:text-black ">Entrar</button>
+        <button
+          class="border-2 py-2 w-3/4 rounded-lg font-black text-xl duration-300 hover:bg-white hover:text-black ">Registrar</button>
+        <a href="#" class="hover:text-gray-400">Esqueci minha senha.</a>
       </div>
     </section>
-    <section>
+    <section class="hidden">
       <div>
         <h2>Crie sua conta</h2>
         <p>Preencha seus dados</p>
