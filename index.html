@@ -9,13 +9,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&display=swap" rel="stylesheet">
-
+  <script src="./src/js/index.js" defer></script>
 </head>
 
 <body class="h-screen w-screen  flex items-center justify-center font-popins ">
   <main class="h-2/3 w-4/5 flex lg:shadow-md">
-    <section
-      class=" bg-black text-white  px-10 py-14 rounded-xl w-full h-full flex flex-col justify-between lg:w-5/12 lg:rounded-none lg:rounded-l-xl lg:shadow-none">
+    <section data-modal-inicio
+      class="hidden bg-black text-white  px-10 py-14 rounded-xl w-full h-full flex flex-col justify-between lg:w-5/12 lg:rounded-none lg:rounded-l-xl lg:shadow-none">
       <div class="flex items-center flex-col gap-2">
 
         <img src="./src/imgs/INFOBANK-logo.png" alt="Logo do InfoBank">
@@ -26,8 +26,8 @@
         <p class="text-sm">Acesse sua conta agora mesmo.</p>
       </div>
       <div class="flex items-center flex-col gap-6">
-        <button
-          class="border-2 py-2 w-3/4 rounded-lg font-black text-xl duration-300 hover:bg-white hover:text-black ">Entrar</button>
+        <button class="border-2 py-2 w-3/4 rounded-lg font-black text-xl duration-300 hover:bg-white hover:text-black"
+          data-btn-login-modal>Entrar</button>
         <button
           class="border-2 py-2 w-3/4 rounded-lg font-black text-xl duration-300 hover:bg-white hover:text-black ">Registrar</button>
         <a href="#" class="hover:text-gray-400">Esqueci minha senha.</a>
@@ -60,7 +60,9 @@
     </section>
 
     <section
-      class="hidden text-black shadow-md bg-zinc-50 px-10 py-14 rounded-xl w-full h-full flex flex-col justify-between items-center lg:flex lg:rounded-none lg:rounded-r-xl lg:shadow-none">
+      class=" text-black shadow-md bg-zinc-50 px-10 py-14 rounded-xl w-full h-full flex flex-col justify-between items-center lg:flex lg:rounded-none lg:rounded-r-xl lg:shadow-none"
+      data-modal-login>
+
       <div class="text-center">
         <h2 class="font-bold text-2xl">Entre na sua conta</h2>
         <p class="text-gray-400">Preencha seus dados</p>
@@ -68,16 +70,17 @@
       <div class="flex flex-col gap-y-7 w-full xl:w-2/4">
         <div class="flex items-center gap-x-4 bg-gray-100 rounded p-3 lg:p-5">
           <img class="w-4 h-4" src="./src/imgs/icon-user.png" alt="user icon">
-          <input class="w-full bg-transparent outline-none" type="text" name="user" id="user" placeholder="Nome">
+          <input data-login class="w-full bg-transparent outline-none" type="text" name="user" id="user"
+            placeholder="Nome">
         </div>
         <div class="flex items-center gap-x-4 bg-gray-100 rounded p-3 lg:p-5">
           <img class="w-4 h-4" src="./src/imgs/icon-pass.png" alt="password icon ">
-          <input class="w-full bg-transparent outline-none" type="text" name="password" id="password"
+          <input data-login class="w-full bg-transparent outline-none" type="text" name="password" id="password"
             placeholder="Senha">
         </div>
       </div>
 
-      <button
+      <button data-btn-entrar
         class="border-2 p-3 w-3/4 rounded-lg text-white bg-black font-black text-xl duration-300 hover:bg-white hover:text-black lg:w-2/4">ENTRAR</button>
     </section>
 
