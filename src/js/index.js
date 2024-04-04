@@ -12,19 +12,15 @@ btnLoginModal.addEventListener("click", () => {
 
 btnEntrarConta.addEventListener("click", () => {
   const teste = document.querySelectorAll("[data-login]");
-  // console.log(teste);
-  teste.forEach((item) => {
-    // console.log(item.value);
-    if (item.value === "") {
-      console.log(item.parentElement);
-      item.parentElement.classList.add("bg-red-700");
+  validaInput(teste);
+});
 
-      return;
+function validaInput(input) {
+  input.forEach((item) => {
+    if (item.value === "") {
+      item.parentElement.classList.add("bg-red-700");
+    } else {
+      item.parentElement.classList.remove("bg-red-700");
     }
   });
-  // if (user && password) {
-  //   //fazer codigo de autenticacao depois
-  // } else {
-  //   console.log("tem n");
-  // }
-});
+}
