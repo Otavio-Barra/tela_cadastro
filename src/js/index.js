@@ -27,6 +27,10 @@ function validaInput(input) {
 
 const btnCadastrarModal = document.querySelector("[data-btn-cadastrar-modal]");
 const btncCadastro = document.querySelector("[data-btn-cadastro]");
+const mensagem = "este campo precisa de no  mínimo 6 caracteres";
+const span = document.createElement("span");
+span.textContent = mensagem;
+span.classList.add("text-red-800");
 
 btnCadastrarModal.addEventListener("click", () => {
   const cadastroModal = document.querySelector("[data-modal-cadastro]");
@@ -38,69 +42,86 @@ btncCadastro.addEventListener("click", () => {
   const teste = document.querySelectorAll("[data-cadastro]");
   const user = new Usuario();
   user.validaCadastro(teste[0], teste[1], teste[2]);
-  console.log(user);
+  if (user.valid === true) {
+    saveUser(user);
+    alert(`Usuário cadastrado com sucesso!`);
+  }
 });
-const regexEmail =
-  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-// function validaCadastro(input) {
-//   input.forEach((item) => {
-//     switch (item.id) {
-//       case "user":
-//         if (item.value !== "" && item.value.length > 5) {
-//           item.parentElement.classList.remove("bg-red-700");
-//         } else {
-//           item.parentElement.classList.add("bg-red-700");
-//         }
-//         break;
-//       case "email":
-//         if (item.value.match(regexEmail)) {
-//           item.parentElement.classList.remove("bg-red-700");
-//           console.log("email");
-//         } else if (!item.value.match(regexEmail)) {
-//           item.parentElement.classList.add("bg-red-700");
-//         }
-//         break;
-//       case "password":
-//         if (item.value !== "" && item.value.length > 5) {
-//           item.parentElement.classList.remove("bg-red-700");
-//         } else {
-//           item.parentElement.classList.add("bg-red-700");
-//         }
-//         break;
-//       default:
-//         break;
-//     }
-//   });
-// }
+
+function getUser() {
+  return JSON.parse(localStorage.getItem("usuarios")) || [];
+}
+
+function saveUser(user) {
+  const users = getUser();
+  users.push(user);
+  localStorage.setItem("usuarios", JSON.stringify(users));
+}
 
 class Usuario {
   constructor(nome, email, senha) {
-    this.Nome = nome;
+    this.user = nome;
     this.Email = email;
     this.Senha = senha;
+    this.valid = false;
   }
 
   validaCadastro(inputUser, inputEmail, inputSenha) {
-    this.validaName(inputUser);
-    this.validaSenha(inputSenha);
+    const user = this.validaName(inputUser);
+    const pass = this.validaSenha(inputSenha);
+    const email = this.validaEmail(inputEmail);
+    console.log(user);
+    if (user && pass && email) {
+      console.log("validado");
+      return (this.valid = true);
+    }
   }
 
   validaName(inputUser) {
     if (inputUser.value === "" && inputUser.value < 6) {
-      inputUser.parentElement.classList.add("bg-red-700");
+      return this.setError(inputUser);
     } else {
-      inputUser.parentElement.classList.remove("bg-red-700");
       this.Nome = inputUser.value;
+      return this.removeError(inputUser);
     }
   }
   validaSenha(inputSenha) {
     if (inputSenha.value === "" && inputSenha.value < 6) {
-      inputSenha.parentElement.classList.add("bg-red-700");
+      return this.setError(inputSenha);
     } else {
-      inputSenha.parentElement.classList.remove("bg-red-700");
       this.Senha = inputSenha.value;
+      return this.removeError(inputSenha);
+    }
+  }
+  validaEmail(inputEmail) {
+    const regexEmail =
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (inputEmail.value.match(regexEmail)) {
+      inputEmail.parentElement.classList.remove("bg-red-700");
+      this.Email = inputEmail.value;
+      return true;
+    } else {
+      inputEmail.parentElement.classList.add("bg-red-700");
+      return false;
     }
   }
 
-  setError(index) {}
+  setError(input) {
+    console.log(input.id + " tem erro!");
+    if (input.value === "" && input.value < 6) {
+      input.parentElement.classList.add("bg-red-700");
+      if (!input.parentElement.parentElement.querySelector("span")) {
+        input.parentElement.parentElement.appendChild(span);
+      }
+      return false;
+    }
+  }
+
+  removeError(input) {
+    input.parentElement.classList.remove("bg-red-700");
+    input.parentElement.parentElement.removeChild(span);
+    return true;
+  }
 }
+
+console.log(localStorage);
