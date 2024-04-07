@@ -22,37 +22,62 @@ function validaInput(input) {
     }
   });
 }
+function switchModal(sectionAtual, sectionAlternativa) {
+  sectionAtual.classList.add("hidden");
+  sectionAlternativa.classList.remove("hidden");
+}
 
 ///////////////////////////////////////////
 
 const btnCadastrarModal = document.querySelector("[data-btn-cadastrar-modal]");
 const btncCadastro = document.querySelector("[data-btn-cadastro]");
+const cadastroModal = document.querySelector("[data-modal-cadastro]");
 const mensagem = "este campo precisa de no  mínimo 6 caracteres";
 const span = document.createElement("span");
 span.textContent = mensagem;
 span.classList.add("text-red-800");
 
 btnCadastrarModal.addEventListener("click", () => {
-  const cadastroModal = document.querySelector("[data-modal-cadastro]");
   sectionBemVindo.classList.add("hidden");
   cadastroModal.classList.remove("hidden");
+  switchModal(sectionBemVindo, cadastroModal);
 });
 
-btncCadastro.addEventListener("click", () => {
-  const teste = document.querySelectorAll("[data-cadastro]");
+btncCadastro.addEventListener("click", saveNewUser);
+
+function saveNewUser() {
+  const campos = document.querySelectorAll("[data-cadastro]");
   const user = new Usuario();
-  user.validaCadastro(teste[0], teste[1], teste[2]);
-  if (user.valid === true) {
-    saveUser(user);
+  user.validaCadastro(campos[0], campos[1], campos[2]);
+  const teste = checkExistUser(getUser(), campos[0].value, campos[1].value);
+  if (user.valid === true && !teste) {
+    saveUserLocalStorage(user);
     alert(`Usuário cadastrado com sucesso!`);
+    console.log(localStorage);
+    switchModal(cadastroModal, sectionBemVindo);
   }
-});
+}
+
+function checkExistUser(users, nomeUser, emailUser) {
+  return users.find((user) => {
+    if (user.Email === emailUser) {
+      alert("Este email já esta em uso!");
+      return true;
+    } else if (user.Nome === nomeUser) {
+      alert("Este nome já esta em uso!");
+      return true;
+    } else {
+      console.log("nao encontrou o usuario");
+      return false;
+    }
+  });
+}
 
 function getUser() {
   return JSON.parse(localStorage.getItem("usuarios")) || [];
 }
 
-function saveUser(user) {
+function saveUserLocalStorage(user) {
   const users = getUser();
   users.push(user);
   localStorage.setItem("usuarios", JSON.stringify(users));
@@ -70,9 +95,7 @@ class Usuario {
     const user = this.validaName(inputUser);
     const pass = this.validaSenha(inputSenha);
     const email = this.validaEmail(inputEmail);
-    console.log(user);
     if (user && pass && email) {
-      console.log("validado");
       return (this.valid = true);
     }
   }
@@ -107,21 +130,26 @@ class Usuario {
   }
 
   setError(input) {
-    console.log(input.id + " tem erro!");
-    if (input.value === "" && input.value < 6) {
-      input.parentElement.classList.add("bg-red-700");
-      if (!input.parentElement.parentElement.querySelector("span")) {
-        input.parentElement.parentElement.appendChild(span);
-      }
-      return false;
+    input.parentElement.classList.add("bg-red-700");
+    if (!input.parentElement.parentElement.querySelector("span")) {
+      input.parentElement.parentElement.appendChild(span);
     }
+    return false;
   }
 
   removeError(input) {
     input.parentElement.classList.remove("bg-red-700");
-    input.parentElement.parentElement.removeChild(span);
+    if (input.parentElement.parentElement.querySelector("span")) {
+      input.parentElement.parentElement.removeChild(span);
+    }
     return true;
   }
 }
 
-console.log(localStorage);
+console.log(localStorage.usuarios);
+
+const btnProvisorio = document.querySelector(".excluir");
+btnProvisorio.addEventListener("click", () => {
+  localStorage.clear();
+  console.log(localStorage);
+});
