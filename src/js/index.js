@@ -30,10 +30,13 @@ function validaLogin(users, inputName, inputSenha) {
     if (userName.Senha === inputSenha.value) {
       inputSenha.parentElement.classList.remove("bg-red-700");
       return true;
+    } else {
+      inputSenha.parentElement.classList.add("bg-red-700");
+      return false;
     }
   } catch (err) {
     inputSenha.parentElement.classList.add("bg-red-700");
-    return false;
+    console.log("senha inexistente");
   }
 }
 function switchModal(sectionAtual, sectionAlternativa) {
