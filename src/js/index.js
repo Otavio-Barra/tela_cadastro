@@ -4,23 +4,37 @@ const sectionBemVindo = document.querySelector("[data-modal-inicio]");
 
 btnLoginModal.addEventListener("click", () => {
   const LoginModal = document.querySelector("[data-modal-login]");
-  sectionBemVindo.classList.add("hidden");
-  LoginModal.classList.remove("hidden");
+  switchModal(sectionBemVindo, LoginModal);
 });
 
 btnEntrarConta.addEventListener("click", () => {
-  const teste = document.querySelectorAll("[data-login]");
-  validaInput(teste);
+  const campos = document.querySelectorAll("[data-login]");
+  const inputName = campos[0];
+  const inputSenha = campos[1];
+  const validacao = validaLogin(getUser(), inputName, inputSenha);
+  if (validacao) {
+    alert("logando");
+  }
 });
-
-function validaInput(input) {
-  input.forEach((item) => {
-    if (item.value === "") {
-      item.parentElement.classList.add("bg-red-700");
+function validaLogin(users, inputName, inputSenha) {
+  const userName = users.find((user) => {
+    if (user.Nome === inputName.value) {
+      inputName.parentElement.classList.remove("bg-red-700");
+      return user;
     } else {
-      item.parentElement.classList.remove("bg-red-700");
+      inputName.parentElement.classList.add("bg-red-700");
+      return false;
     }
   });
+  try {
+    if (userName.Senha === inputSenha.value) {
+      inputSenha.parentElement.classList.remove("bg-red-700");
+      return true;
+    }
+  } catch (err) {
+    inputSenha.parentElement.classList.add("bg-red-700");
+    return false;
+  }
 }
 function switchModal(sectionAtual, sectionAlternativa) {
   sectionAtual.classList.add("hidden");
@@ -30,7 +44,7 @@ function switchModal(sectionAtual, sectionAlternativa) {
 ///////////////////////////////////////////
 
 const btnCadastrarModal = document.querySelector("[data-btn-cadastrar-modal]");
-const btncCadastro = document.querySelector("[data-btn-cadastro]");
+const btnCadastro = document.querySelector("[data-btn-cadastro]");
 const cadastroModal = document.querySelector("[data-modal-cadastro]");
 const mensagem = "este campo precisa de no  mínimo 6 caracteres";
 const span = document.createElement("span");
@@ -43,7 +57,7 @@ btnCadastrarModal.addEventListener("click", () => {
   switchModal(sectionBemVindo, cadastroModal);
 });
 
-btncCadastro.addEventListener("click", saveNewUser);
+btnCadastro.addEventListener("click", saveNewUser);
 
 function saveNewUser() {
   const campos = document.querySelectorAll("[data-cadastro]");
@@ -147,9 +161,3 @@ class Usuario {
 }
 
 console.log(localStorage.usuarios);
-
-const btnProvisorio = document.querySelector(".excluir");
-btnProvisorio.addEventListener("click", () => {
-  localStorage.clear();
-  console.log(localStorage);
-});
