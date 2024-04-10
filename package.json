@@ -2,6 +2,7 @@
   "devDependencies": {
     "tailwindcss": "^3.4.3"
   },
+  "type": "module",
   "name": "cadastro_usuario",
   "version": "1.0.0",
   "main": "tailwind.config.js",

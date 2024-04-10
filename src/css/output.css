@@ -2664,6 +2664,10 @@ video {
     display: flex;
   }
 
+  .lg\:hidden {
+    display: none;
+  }
+
   .lg\:w-2\/4 {
     width: 50%;
   }
