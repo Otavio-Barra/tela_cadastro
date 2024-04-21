@@ -14,13 +14,9 @@ Bem-vindo ao Tela de cadastro, um projeto desenvolvido com objetivo de praticar.
 
 - **Logar:** caso o usuario estiver correto ira levar para outra pagina.
 
-## Como Visualizar Localmente
+## Como Visualizar
 
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/seu-usuario/catalogo-filmes.git
-
-2. Explore a [Tela de login](https://glistening-pasca-7fd5a1.netlify.app/) pelo deploy.
+1. Explore a [Tela de login](https://glistening-pasca-7fd5a1.netlify.app/) pelo deploy.
 
 ## Contato
 
