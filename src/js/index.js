@@ -4,7 +4,19 @@ const btnLoginModal = document.querySelector("[data-btn-login-modal]");
 const btnEntrarConta = document.querySelector("[data-btn-entrar]");
 const sectionBemVindo = document.querySelector("[data-modal-inicio]");
 const LoginModal = document.querySelector("[data-modal-login]");
+const btnCadastrarModal = document.querySelector("[data-btn-cadastrar-modal]");
+const btnCadastro = document.querySelector("[data-btn-cadastro]");
+const cadastroModal = document.querySelector("[data-modal-cadastro]");
 let touchDevice = "ontouchstart" in document.documentElement;
+const cadastroToHomeBtn = document.querySelector("[data-cadastro-home]");
+const loginToHomeBtn = document.querySelector("[data-login-home]");
+
+cadastroToHomeBtn.addEventListener("click", () =>
+  switchModal(cadastroModal, sectionBemVindo)
+);
+loginToHomeBtn.addEventListener("click", () =>
+  switchModal(LoginModal, sectionBemVindo)
+);
 
 function switchModal(sectionAtual, sectionAlternativa) {
   sectionAtual.classList.add("hidden");
@@ -30,6 +42,7 @@ function login() {
   const validacao = validaLogin(getUser(), inputName, inputSenha);
   if (validacao) {
     alert("logando");
+    window.location.replace("./logado.html");
   }
 }
 
@@ -55,10 +68,6 @@ function validaLogin(users, inputName, inputSenha) {
     inputSenha.parentElement.classList.add("bg-red-700");
   }
 }
-
-const btnCadastrarModal = document.querySelector("[data-btn-cadastrar-modal]");
-const btnCadastro = document.querySelector("[data-btn-cadastro]");
-const cadastroModal = document.querySelector("[data-modal-cadastro]");
 
 btnCadastrarModal.addEventListener("click", () => {
   if (touchDevice) {
@@ -108,66 +117,3 @@ function saveUserLocalStorage(user) {
   users.push(user);
   localStorage.setItem("usuarios", JSON.stringify(users));
 }
-
-// class User {
-//   constructor(nome, email, senha) {
-//     this.user = nome;
-//     this.Email = email;
-//     this.Senha = senha;
-//     this.valid = false;
-//   }
-
-//   validaCadastro(inputUser, inputEmail, inputSenha) {
-//     const user = this.validaName(inputUser);
-//     const pass = this.validaSenha(inputSenha);
-//     const email = this.validaEmail(inputEmail);
-//     if (user && pass && email) {
-//       return (this.valid = true);
-//     }
-//   }
-
-//   validaName(inputUser) {
-//     if (inputUser.value === "" && inputUser.value < 6) {
-//       return this.setError(inputUser);
-//     } else {
-//       this.Nome = inputUser.value;
-//       return this.removeError(inputUser);
-//     }
-//   }
-//   validaSenha(inputSenha) {
-//     if (inputSenha.value === "" && inputSenha.value < 6) {
-//       return this.setError(inputSenha);
-//     } else {
-//       this.Senha = inputSenha.value;
-//       return this.removeError(inputSenha);
-//     }
-//   }
-//   validaEmail(inputEmail) {
-//     const regexEmail =
-//       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-//     if (inputEmail.value.match(regexEmail)) {
-//       inputEmail.parentElement.classList.remove("bg-red-700");
-//       this.Email = inputEmail.value;
-//       return true;
-//     } else {
-//       inputEmail.parentElement.classList.add("bg-red-700");
-//       return false;
-//     }
-//   }
-
-//   setError(input) {
-//     input.parentElement.classList.add("bg-red-700");
-//     if (!input.parentElement.parentElement.querySelector("span")) {
-//       input.parentElement.parentElement.appendChild(span);
-//     }
-//     return false;
-//   }
-
-//   removeError(input) {
-//     input.parentElement.classList.remove("bg-red-700");
-//     if (input.parentElement.parentElement.querySelector("span")) {
-//       input.parentElement.parentElement.removeChild(span);
-//     }
-//     return true;
-//   }
-// }

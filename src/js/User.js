@@ -1,3 +1,7 @@
+const mensagem = "este campo precisa de no  mínimo 6 caracteres";
+const span = document.createElement("span");
+span.textContent = mensagem;
+span.classList.add("text-red-800");
 class User {
   constructor(name, email, password) {
     this.user = name;
@@ -60,9 +64,5 @@ class User {
     return true;
   }
 }
-const mensagem = "este campo precisa de no  mínimo 6 caracteres";
-const span = document.createElement("span");
-span.textContent = mensagem;
-span.classList.add("text-red-800");
 
 export default User;

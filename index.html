@@ -34,8 +34,12 @@
       </div>
     </section>
     <section data-modal-cadastro
-      class="hidden text-black shadow-md bg-zinc-50 px-10 py-14 rounded-xl w-full h-full flex flex-col justify-between items-center lg:flex lg:rounded-none lg:rounded-r-xl lg:shadow-none">
-      <div class="text-center">
+      class="hidden text-black relative shadow-md bg-zinc-50 px-10 py-14 rounded-xl w-full h-full flex flex-col justify-between items-center lg:flex lg:rounded-none lg:rounded-r-xl lg:shadow-none">
+
+      <img data-cadastro-home class="cursor-pointer w-6 h-6 absolute left-8 lg:hidden" src="./src/imgs/left-arrow.png"
+        alt="seta para voltar">
+
+      <div class=" text-center">
         <h2 class="font-bold text-2xl">Crie sua conta</h2>
         <p class="text-gray-400">Preencha seus dados</p>
       </div>
@@ -62,9 +66,10 @@
     </section>
 
     <section
-      class="hidden text-black shadow-md bg-zinc-50 px-10 py-14 rounded-xl w-full h-full flex flex-col justify-between items-center  lg:rounded-none lg:rounded-r-xl lg:shadow-none"
+      class="hidden relative text-black shadow-md bg-zinc-50 px-10 py-14 rounded-xl w-full h-full flex flex-col justify-between items-center  lg:rounded-none lg:rounded-r-xl lg:shadow-none"
       data-modal-login>
-
+      <img data-login-home class="cursor-pointer w-6 h-6 absolute left-8 lg:hidden" src="./src/imgs/left-arrow.png"
+        alt="seta para voltar">
       <div class="text-center">
         <h2 class="font-bold text-2xl">Entre na sua conta</h2>
         <p class="text-gray-400">Preencha seus dados</p>
